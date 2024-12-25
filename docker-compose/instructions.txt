@@ -1,0 +1,16 @@
+# INSTRUCTIONS FOR INFRASTRUCTURE
+
+# Docker
+docker pull amazoncorretto:21.0.4-alpine
+docker pull prom/prometheus
+
+MONITORING
+docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus
+
+
+# INFRAESTRUCTURE
+docker-compose -f common.yml -f 1.infra-structure.yml up -d
+
+
+# USERS MICROSERVICE
+docker-compose -f common.yml -f 2.applications.yml up -d

@@ -1,0 +1,23 @@
+services:
+  users-service:
+    image: 'hotels-occupancy:latest'
+    build:
+      context: ../
+    container_name: hotels-occupancy
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_USER_NAME=${DATABASE_USER_NAME}
+      - DATABASE_USER_PASSWORD=${DATABASE_USER_PASSWORD}
+      - DATABASE_HOST_NAME=${DATABASE_HOST_NAME}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - USERS_APPLICATION_PORT=${USERS_APPLICATION_PORT}
+      - USERS_LOGGING_LEVEL=INFO
+      - USERS_SHOW_SQL=true
+      - APPLICATION_NAME=hotels-occupancy
+      - ENVIRONMENT=dev
+      - QUALIFIER=services
+      - spring.profiles.active=dev
+    networks:
+      - ${GLOBAL_NETWORK:-example-network}
